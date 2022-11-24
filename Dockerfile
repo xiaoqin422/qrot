@@ -1,12 +1,11 @@
 FROM openjdk:8-jre-alpine
 LABEL maintainer="2578908933@qq.com"
 #复制打好的jar包
-WORKDIR /data
+WORKDIR /qrot
 COPY cache cache
 COPY target/*.jar app.jar
-RUN  apk add -U tzdata; \
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime; \
-echo 'Asia/Shanghai' >/etc/timezone; \
+ENV TZ=PRC
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 touch app.jar;
 
 ENV JAVA_OPTS=""

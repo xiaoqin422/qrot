@@ -1,0 +1,62 @@
+2022-11-25 18:20:46.742 INFO  --- [           main] cn.stuxx.QRotApplication                 : Starting QRotApplication using Java 1.8.0_282 on QXX with PID 9944 (D:\Code\IDEA\project\qrot\qrot\target\classes started by 秦笑笑L in D:\Code\IDEA\project\qrot\qrot)
+2022-11-25 18:20:46.746 INFO  --- [           main] cn.stuxx.QRotApplication                 : No active profile set, falling back to 1 default profile: "default"
+2022-11-25 18:20:52.134 INFO  --- [           main] cn.stuxx.QRotApplication                 : Started QRotApplication in 5.99 seconds (JVM running for 7.489)
+2022-11-25 18:24:36.073 INFO  --- [           main] cn.stuxx.QRotApplication                 : Starting QRotApplication using Java 1.8.0_282 on QXX with PID 6720 (D:\Code\IDEA\project\qrot\qrot\target\classes started by 秦笑笑L in D:\Code\IDEA\project\qrot\qrot)
+2022-11-25 18:24:36.076 INFO  --- [           main] cn.stuxx.QRotApplication                 : The following 1 profile is active: "dev"
+2022-11-25 18:26:00.546 INFO  --- [           main] cn.stuxx.QRotApplication                 : Starting QRotApplication using Java 1.8.0_282 on QXX with PID 17000 (D:\Code\IDEA\project\qrot\qrot\target\classes started by 秦笑笑L in D:\Code\IDEA\project\qrot\qrot)
+2022-11-25 18:26:00.549 INFO  --- [           main] cn.stuxx.QRotApplication                 : The following 1 profile is active: "dev"
+2022-11-25 18:26:32.019 INFO  --- [           main] cn.stuxx.QRotApplication                 : Starting QRotApplication using Java 1.8.0_282 on QXX with PID 10376 (D:\Code\IDEA\project\qrot\qrot\target\classes started by 秦笑笑L in D:\Code\IDEA\project\qrot\qrot)
+2022-11-25 18:26:32.022 INFO  --- [           main] cn.stuxx.QRotApplication                 : The following 1 profile is active: "dev"
+2022-11-25 18:26:36.181 INFO  --- [atcher-worker-1] love.forte.simbot.mirai.bot.2061994134   : Loaded account secrets from local cache.
+2022-11-25 18:26:36.184 INFO  --- [atcher-worker-1] love.forte.simbot.mirai.net.2061994134   : ECDH key is valid.
+2022-11-25 18:26:36.380 INFO  --- [atcher-worker-1] love.forte.simbot.mirai.bot.2061994134   : Saved account secrets to local cache for fast login.
+2022-11-25 18:26:36.486 INFO  --- [atcher-worker-1] love.forte.simbot.mirai.bot.2061994134   : Login successful.
+2022-11-25 18:26:36.487 INFO  --- [ntLoopGroup-2-4] love.forte.simbot.mirai.net.2061994134   : Server time updated, serverTime: 1669371995, diff: -1ms=-0.001s
+2022-11-25 18:26:36.492 INFO  --- [         task-2] love.forte.simbot.mirai.net.2061994134   : Syncing friend message history...
+2022-11-25 18:26:36.497 INFO  --- [atcher-worker-5] love.forte.simbot.mirai.net.2061994134   : Start loading friend list...
+2022-11-25 18:26:36.498 INFO  --- [atcher-worker-7] love.forte.simbot.mirai.net.2061994134   : Start loading stranger list...
+2022-11-25 18:26:36.502 INFO  --- [atcher-worker-1] love.forte.simbot.mirai.net.2061994134   : Start loading friendGroup list...
+2022-11-25 18:26:36.594 INFO  --- [atcher-worker-5] love.forte.simbot.mirai.net.2061994134   : Start loading group list...
+2022-11-25 18:26:36.624 INFO  --- [atcher-worker-5] love.forte.simbot.mirai.net.2061994134   : Successfully loaded stranger list: 1 in total
+2022-11-25 18:26:36.647 INFO  --- [atcher-worker-5] love.forte.simbot.mirai.net.2061994134   : Successfully loaded friend list: 22 in total
+2022-11-25 18:26:36.650 INFO  --- [atcher-worker-5] love.forte.simbot.mirai.net.2061994134   : No OtherClient online.
+2022-11-25 18:26:36.653 INFO  --- [         task-6] love.forte.simbot.mirai.net.2061994134   : Syncing friend message history: Success.
+2022-11-25 18:26:36.666 INFO  --- [atcher-worker-5] love.forte.simbot.mirai.net.2061994134   : Successfully loaded friendGroup list: 4 in total
+2022-11-25 18:26:36.898 INFO  --- [atcher-worker-6] love.forte.simbot.mirai.net.2061994134   : Successfully loaded group list: 5 in total.
+2022-11-25 18:26:36.904 INFO  --- [atcher-worker-5] love.forte.simbot.mirai.net.2061994134   : Scheduled key refresh in 23h 55min 0.0s.
+2022-11-25 18:26:36.904 INFO  --- [atcher-worker-4] love.forte.simbot.mirai.net.2061994134   : Scheduled refresh login session in 19d 23h 55min 0.0s.
+2022-11-25 18:26:36.907 INFO  --- [atcher-worker-6] love.forte.simbot.mirai.bot.2061994134   : Bot login successful.
+2022-11-25 18:26:37.357 INFO  --- [           main] cn.stuxx.QRotApplication                 : Started QRotApplication in 5.925 seconds (JVM running for 7.358)
+2022-11-25 18:26:56.707 INFO  --- [nio-8080-exec-1] cn.stuxx.config.aop.LogPrintAspect       : ========================================== Start ==========================================
+2022-11-25 18:26:56.708 INFO  --- [nio-8080-exec-1] cn.stuxx.config.aop.LogPrintAspect       : URL            : http://localhost:8080/test
+2022-11-25 18:26:56.708 INFO  --- [nio-8080-exec-1] cn.stuxx.config.aop.LogPrintAspect       : Description    : 
+2022-11-25 18:26:56.708 INFO  --- [nio-8080-exec-1] cn.stuxx.config.aop.LogPrintAspect       : HTTP Method    : GET
+2022-11-25 18:26:56.708 INFO  --- [nio-8080-exec-1] cn.stuxx.config.aop.LogPrintAspect       : Class Method   : cn.stuxx.controller.WebController.test
+2022-11-25 18:26:56.708 INFO  --- [nio-8080-exec-1] cn.stuxx.config.aop.LogPrintAspect       : IP             : 0:0:0:0:0:0:0:1
+2022-11-25 18:26:56.708 INFO  --- [nio-8080-exec-1] cn.stuxx.config.aop.LogPrintAspect       : Request Args   : 
+2022-11-25 18:26:56.718 INFO  --- [nio-8080-exec-1] cn.stuxx.config.aop.LogPrintAspect       : =========================================== End ===========================================
+
+2022-11-25 18:26:56.811 INFO  --- [nio-8080-exec-1] cn.stuxx.config.aop.LogPrintAspect       : Response Args  : "Hello,Jenkins!"
+2022-11-25 18:26:56.812 INFO  --- [nio-8080-exec-1] cn.stuxx.config.aop.LogPrintAspect       : Time-Consuming : 105 ms
+2022-11-25 18:34:41.611 INFO  --- [           main] cn.stuxx.QRotApplication                 : Starting QRotApplication using Java 1.8.0_282 on QXX with PID 11200 (D:\Code\IDEA\project\qrot\qrot\target\classes started by 秦笑笑L in D:\Code\IDEA\project\qrot\qrot)
+2022-11-25 18:34:41.614 INFO  --- [           main] cn.stuxx.QRotApplication                 : The following 1 profile is active: "dev"
+2022-11-25 18:34:45.142 INFO  --- [atcher-worker-1] love.forte.simbot.mirai.bot.2061994134   : Loaded account secrets from local cache.
+2022-11-25 18:34:45.143 INFO  --- [atcher-worker-1] love.forte.simbot.mirai.net.2061994134   : ECDH key is valid.
+2022-11-25 18:34:45.317 INFO  --- [atcher-worker-1] love.forte.simbot.mirai.bot.2061994134   : Saved account secrets to local cache for fast login.
+2022-11-25 18:34:45.417 INFO  --- [atcher-worker-1] love.forte.simbot.mirai.bot.2061994134   : Login successful.
+2022-11-25 18:34:45.418 INFO  --- [ntLoopGroup-2-4] love.forte.simbot.mirai.net.2061994134   : Server time updated, serverTime: 1669372484, diff: -1ms=-0.001s
+2022-11-25 18:34:45.421 INFO  --- [         task-2] love.forte.simbot.mirai.net.2061994134   : Syncing friend message history...
+2022-11-25 18:34:45.427 INFO  --- [atcher-worker-5] love.forte.simbot.mirai.net.2061994134   : Start loading friend list...
+2022-11-25 18:34:45.428 INFO  --- [atcher-worker-7] love.forte.simbot.mirai.net.2061994134   : Start loading stranger list...
+2022-11-25 18:34:45.431 INFO  --- [atcher-worker-3] love.forte.simbot.mirai.net.2061994134   : Start loading friendGroup list...
+2022-11-25 18:34:45.516 INFO  --- [atcher-worker-3] love.forte.simbot.mirai.net.2061994134   : Start loading group list...
+2022-11-25 18:34:45.559 INFO  --- [atcher-worker-3] love.forte.simbot.mirai.net.2061994134   : Successfully loaded stranger list: 1 in total
+2022-11-25 18:34:45.562 INFO  --- [atcher-worker-3] love.forte.simbot.mirai.net.2061994134   : No OtherClient online.
+2022-11-25 18:34:45.595 INFO  --- [atcher-worker-3] love.forte.simbot.mirai.net.2061994134   : Successfully loaded friend list: 22 in total
+2022-11-25 18:34:45.609 INFO  --- [atcher-worker-3] love.forte.simbot.mirai.net.2061994134   : Successfully loaded friendGroup list: 4 in total
+2022-11-25 18:34:45.613 INFO  --- [         task-6] love.forte.simbot.mirai.net.2061994134   : Syncing friend message history: Success.
+2022-11-25 18:34:45.901 INFO  --- [atcher-worker-4] love.forte.simbot.mirai.net.2061994134   : Successfully loaded group list: 5 in total.
+2022-11-25 18:34:45.908 INFO  --- [atcher-worker-7] love.forte.simbot.mirai.net.2061994134   : Scheduled refresh login session in 19d 23h 55min 0.0s.
+2022-11-25 18:34:45.908 INFO  --- [atcher-worker-5] love.forte.simbot.mirai.net.2061994134   : Scheduled key refresh in 23h 55min 0.0s.
+2022-11-25 18:34:45.913 INFO  --- [atcher-worker-4] love.forte.simbot.mirai.bot.2061994134   : Bot login successful.
+2022-11-25 18:34:46.410 INFO  --- [           main] cn.stuxx.QRotApplication                 : Started QRotApplication in 5.257 seconds (JVM running for 6.529)

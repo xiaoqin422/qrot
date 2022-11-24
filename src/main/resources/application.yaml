@@ -2,3 +2,8 @@ simbot:
   # 是否在bot注册完成后自动启动他们。
   # 默认为 true
   auto-start-bots: true
+server:
+  port: 8080
+spring:
+  profiles:
+    active: dev
