@@ -124,9 +124,9 @@ pipeline {
                                 sh "docker tag ${IMAGE_NAME} ccr.ccs.tencentyun.com/qinxiaoxiao/qrot:${IMAGE_VERSION}"
                                 sh "docker push ccr.ccs.tencentyun.com/qinxiaoxiao/qrot:${IMAGE_VERSION}"
                             }
-//                            catchError(buildResult: 'SUCCESS', catchInterruptions: false) {
-//                                echo '镜像推送失败，请及时处理！'
-//                            }
+                            catchError(buildResult: 'SUCCESS', catchInterruptions: false) {
+                                echo '镜像推送失败，请及时处理！'
+                            }
                         }
                     }
                 }
