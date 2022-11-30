@@ -10,7 +10,7 @@
         --controller            控制层
         --dao                   数据层
         --service               业务层
-        --pojo                  实体对象（entity、dto）
+        --model                 实体对象（entity、dto）
         --utils                 工具类
     QRotApplication             主启动类
     -resource           项目资源

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stuxx.dao.RoleDao">
+
+    <resultMap type="cn.stuxx.model.entity.Role" id="RoleMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="permissions" column="permissions" jdbcType="VARCHAR"/>
+        <result property="desc" column="desc" jdbcType="VARCHAR"/>
+        <result property="defaultPermissions" column="default_permissions" jdbcType="VARCHAR"/>
+        <result property="systemic" column="systemic" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="RoleMap">
+        select id,
+               name,
+               permissions, desc, default_permissions, systemic
+        from role
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAll" resultMap="RoleMap">
+        select
+        id, name, permissions, desc, default_permissions, systemic
+        from role
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="permissions != null">
+                and permissions = #{permissions}
+            </if>
+            <if test="desc != null and desc != ''">
+                and desc = #{desc}
+            </if>
+            <if test="defaultPermissions != null">
+                and default_permissions = #{defaultPermissions}
+            </if>
+            <if test="systemic != null">
+                and systemic = #{systemic}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(*)
+        from role
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="permissions != null">
+                and permissions = #{permissions}
+            </if>
+            <if test="desc != null and desc != ''">
+                and desc = #{desc}
+            </if>
+            <if test="defaultPermissions != null">
+                and default_permissions = #{defaultPermissions}
+            </if>
+            <if test="systemic != null">
+                and systemic = #{systemic}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into role(name, permissions, desc, default_permissions, systemic)
+        values (#{name}, #{permissions}, #{desc}, #{defaultPermissions}, #{systemic})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into role(name, permissions, desc, default_permissions, systemic)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.permissions}, #{entity.desc}, #{entity.defaultPermissions}, #{entity.systemic})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into role(name, permissions, desc, default_permissions, systemic)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.permissions}, #{entity.desc}, #{entity.defaultPermissions}, #{entity.systemic})
+        </foreach>
+        on duplicate key update
+        name = values(name),
+        permissions = values(permissions),
+        desc = values(desc),
+        default_permissions = values(default_permissions),
+        systemic = values(systemic)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update role
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="permissions != null">
+                permissions = #{permissions},
+            </if>
+            <if test="desc != null and desc != ''">
+                desc = #{desc},
+            </if>
+            <if test="defaultPermissions != null">
+                default_permissions = #{defaultPermissions},
+            </if>
+            <if test="systemic != null">
+                systemic = #{systemic},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from role
+        where id = #{id}
+    </delete>
+
+</mapper>
