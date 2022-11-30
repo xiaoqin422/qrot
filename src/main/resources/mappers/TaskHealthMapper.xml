@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stuxx.dao.TaskHealthDao">
+
+    <resultMap type="cn.stuxx.model.entity.TaskHealth" id="TaskHealthMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="taskId" column="task_id" jdbcType="VARCHAR"/>
+        <result property="uId" column="u_id" jdbcType="INTEGER"/>
+        <result property="pid" column="pid" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="temperature" column="temperature" jdbcType="NUMERIC"/>
+        <result property="isRandom" column="is_random" jdbcType="INTEGER"/>
+        <result property="isTiming" column="is_timing" jdbcType="INTEGER"/>
+    </resultMap>
+    <!--一种动态的insert语句-->
+    <sql id="TaskHealthInfoColumns">
+        <trim suffixOverrides=",">
+            <if test="taskId != null and taskId != ''">
+                task_id,
+            </if>
+            <if test="uId != null">
+                u_id,
+            </if>
+            <if test="pid != null and pid != ''">
+                pid,
+            </if>
+            <if test="address != null and address != ''">
+                address,
+            </if>
+            <if test="temperature != null">
+                temperature,
+            </if>
+            <if test="isRandom != null">
+                is_random,
+            </if>
+            <if test="isTiming != null">
+                is_timing
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="TaskHealthInfoValues">
+        <trim suffixOverrides=",">
+            <if test="taskId != null and taskId != ''">
+                #{taskId},
+            </if>
+            <if test="uId != null">
+                #{uId},
+            </if>
+            <if test="pid != null and pid != ''">
+                #{pid},
+            </if>
+            <if test="address != null and address != ''">
+                #{address},
+            </if>
+            <if test="temperature != null">
+                #{temperature},
+            </if>
+            <if test="isRandom != null">
+                #{isRandom},
+            </if>
+            <if test="isTiming != null">
+                #{isTiming}
+            </if>
+        </trim>
+    </sql>
+    <!--查询单个-->
+    <select id="queryById" resultMap="TaskHealthMap">
+        select id,
+               task_id,
+               u_id,
+               pid,
+               address,
+               temperature,
+               is_random,
+               is_timing
+        from task_health
+        where id = #{id}
+    </select>
+    <!--根据UserID打卡任务-->
+    <select id="selectTaskByUserId" resultMap="TaskHealthMap">
+        SELECT th.*
+        FROM task_health AS th
+                 LEFT JOIN `user` AS u ON u.id = th.u_id
+        WHERE u.id = #{userId}  AND u.is_disable = 0 AND u.is_delete = 0
+    </select>
+    <!--根据QQ号查询打卡任务-->
+    <select id="selectTaskByQCode" resultMap="TaskHealthMap">
+        SELECT th.*
+        FROM task_health AS th
+                 LEFT JOIN `user` AS u ON u.id = th.u_id
+        WHERE u.q_code = #{accountCode} AND u.is_delete = 0 AND u.is_disable = 0
+    </select>
+    <!--查询指定行数据-->
+    <select id="queryAll" resultMap="TaskHealthMap">
+        select
+        id, task_id, u_id, pid, address, temperature, is_random, is_timing
+        from task_health
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="taskId != null and taskId != ''">
+                and task_id = #{taskId}
+            </if>
+            <if test="uId != null">
+                and u_id = #{uId}
+            </if>
+            <if test="pid != null and pid != ''">
+                and pid = #{pid}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="temperature != null">
+                and temperature = #{temperature}
+            </if>
+            <if test="isRandom != null">
+                and is_random = #{isRandom}
+            </if>
+            <if test="isTiming != null">
+                and is_timing = #{isTiming}
+            </if>
+        </where>
+    </select>
+    <select id="selectTimingTask" resultMap="TaskHealthMap">
+        SELECT *
+        FROM task_health th
+        WHERE th.is_timing = 1
+    </select>
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(*)
+        from task_health
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="taskId != null and taskId != ''">
+                and task_id = #{taskId}
+            </if>
+            <if test="uId != null">
+                and u_id = #{uId}
+            </if>
+            <if test="pid != null and pid != ''">
+                and pid = #{pid}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="temperature != null">
+                and temperature = #{temperature}
+            </if>
+            <if test="isRandom != null">
+                and is_random = #{isRandom}
+            </if>
+            <if test="isTiming != null">
+                and is_timing = #{isTiming}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into task_health(task_id, u_id, pid, address, temperature, is_random, is_timing)
+        values (#{taskId}, #{uId}, #{pid}, #{address}, #{temperature}, #{isRandom}, #{isTiming})
+    </insert>
+
+    <!--新增非空列-->
+    <insert id="insertOnDefault" keyProperty="id" useGeneratedKeys="true">
+        insert into task_health(<include refid="TaskHealthInfoColumns"/>)
+        values(<include refid="TaskHealthInfoValues"/>)
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into task_health(task_id, u_id, pid, address, temperature, is_random, is_timing)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.taskId}, #{entity.uId}, #{entity.pid}, #{entity.address}, #{entity.temperature},
+            #{entity.isRandom}, #{entity.isTiming})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into task_health(task_id, u_id, pid, address, temperature, is_random, is_timing)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.taskId}, #{entity.uId}, #{entity.pid}, #{entity.address}, #{entity.temperature},
+            #{entity.isRandom}, #{entity.isTiming})
+        </foreach>
+        on duplicate key update
+        task_id = values(task_id),
+        u_id = values(u_id),
+        pid = values(pid),
+        address = values(address),
+        temperature = values(temperature),
+        is_random = values(is_random),
+        is_timing = values(is_timing)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update task_health
+        <set>
+            <if test="taskId != null and taskId != ''">
+                task_id = #{taskId},
+            </if>
+            <if test="uId != null">
+                u_id = #{uId},
+            </if>
+            <if test="pid != null and pid != ''">
+                pid = #{pid},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="temperature != null">
+                temperature = #{temperature},
+            </if>
+            <if test="isRandom != null">
+                is_random = #{isRandom},
+            </if>
+            <if test="isTiming != null">
+                is_timing = #{isTiming},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from task_health
+        where id = #{id}
+    </delete>
+
+</mapper>

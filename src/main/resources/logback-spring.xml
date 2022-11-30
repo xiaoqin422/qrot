@@ -2,7 +2,7 @@
 <!--debug：打印logback内部日志信息，实时查看logback运行状态，默认值为false
 scan：配置文件发生更改时，进行重载，默认值为true
 scanPeriod：监测配置文件是否有修改的时间间隔，默认值为6000，默认单位为毫秒-->
-<configuration debug="true">
+<configuration debug="false">
     <property name="LOG_PATH" value="logs" />
     <property name="LOG_NAME" value="QRot" />
     <!-- appender是configuration的子节点，是负责写日志的组件。 -->
@@ -126,6 +126,7 @@ scanPeriod：监测配置文件是否有修改的时间间隔，默认值为6000
     <!-- 利用logback输入mybatis的sql日志，
     注意：如果不加 additivity="false" 则此logger会将输出转发到自身以及祖先的logger中，就会出现日志文件中sql重复打印-->
     <logger name="cn.stuxx.dao" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
         <appender-ref ref="info_log" />
         <appender-ref ref="error_log" />
     </logger>
@@ -134,6 +135,7 @@ scanPeriod：监测配置文件是否有修改的时间间隔，默认值为6000
     <logger name="cn.stuxx.service" level="INFO" additivity="false">
         <appender-ref ref="info_log" />
         <appender-ref ref="error_log" />
+        <appender-ref ref="STDOUT" />
     </logger>
 
 </configuration>

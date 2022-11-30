@@ -17,7 +17,7 @@ pipeline {
         //dockerBuild之后的镜像名称,必须全是小写
         IMAGE_NAME = "${BUILD_TAG}".toLowerCase()
         IMAGE_VERSION = "v1.0"
-        CONTAINER_NAME = "${JOB_NAME}".replaceAll("/", "_")
+        CONTAINER_NAME = "${JOB_NAME}".substring(0,"${JOB_NAME}".indexOf('/'))
         IsPush = "是"
     }
     //声明需要使用的工具
@@ -88,13 +88,22 @@ pipeline {
         stage('部署') {
             input {
                 message "确认联调环境部署"
-                ok "确认"
+                ok "提交"
+                id "Deploy"
+                parameters {
+                    choice(name: 'IsDeploy', choices: ['是', '否'], description: '是否部署')
+                }
                 //可以加身份选择
             }
             steps {
-                sh "printenv"
-                sh "docker rm -f ${CONTAINER_NAME} || true"
-                sh "docker run -d -p 8082:8080 -v /data/docker/qrot/cache:/qrot/cache -v /data/docker/qrot/logs:/qrot/logs --restart always --name ${CONTAINER_NAME} ${IMAGE_NAME}"
+                script {
+                    String deploy = "${IsDeploy}"
+                    if (deploy == "是") {
+                        sh "printenv"
+                        sh "docker rm -f ${CONTAINER_NAME} || true"
+                        sh "docker run -d -p 8082:8080 -v /data/docker/qrot/cache:/qrot/cache -v /data/docker/qrot/logs:/qrot/logs --restart always --name ${CONTAINER_NAME} ${IMAGE_NAME}"
+                    }
+                }
             }
         }
         stage('推送') {
@@ -108,9 +117,9 @@ pipeline {
                     agent any
                     options { skipDefaultCheckout true }
                     input {
-                        message "镜像推送确认"
+                        message "确认镜像推送"
                         ok "提交"
-                        id "imagePush"
+                        id "Push"
                         parameters {
                             string(name: 'IMAGE_VERSION', defaultValue: '1.0', description: '镜像版本号')
                             choice(name: 'IsPush', choices: ['是', '否'], description: '是否推送')
@@ -118,7 +127,8 @@ pipeline {
                     }
                     steps {
                         script {
-                            if ("${IsPush}" == "是") {
+                            String push = "${IsPush}"
+                            if (push == "是") {
                                 sh 'pwd && ls -alh'
                                 sh "docker login -u ${BITBUCKET_COMMON_CREDS_USR} -p ${BITBUCKET_COMMON_CREDS_PSW} ccr.ccs.tencentyun.com"
                                 sh "docker tag ${IMAGE_NAME} ccr.ccs.tencentyun.com/qinxiaoxiao/qrot:${IMAGE_VERSION}"
@@ -147,8 +157,8 @@ pipeline {
                 beforeInput true
             }
             input {
-                message "是否部署到线上环境"
-                ok "是"
+                message "确认线上环境"
+                ok "提交"
                 parameters {
                     choice choices: ['腾讯云（82.156.25.172）', '阿里云（106.14.31.50）'], description: '线上环境', name: 'DEPLOY_IP'
                 }
@@ -188,7 +198,6 @@ pipeline {
         <tr>
                            <br/>
                             ${ENV, var="COMMIT_NAME"}，您好，以下为${PROJECT_NAME }项目构建信息</br>
-                            <td><font color="#CC0000">构建结果 - ${BUILD_STATUS}</font></td>
                         </tr>
         <tr>
             <td><h2>

@@ -3,7 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>cn.stuxx</groupId>
     <artifactId>qrot</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -25,16 +24,45 @@
         <!--fastjson-->
         <fastjson.version>2.0.19</fastjson.version>
         <!--MyBatis-->
-        <mybatis.version>3.5.11</mybatis.version>
+        <mybatis.version>2.2.2</mybatis.version>
+        <!--druid 连接池-->
+        <druid.version>1.2.15</druid.version>
         <!--lombok-->
         <lombok.version>1.18.24</lombok.version>
-
+        <!--xxJob-->
+        <xxjob.version>2.3.1</xxjob.version>
     </properties>
     <dependencies>
         <!--Web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--邮件服务-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <!--MySQL-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!--JDBC-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <!--Druid-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <!--fastjson-->
         <dependency>
@@ -44,9 +72,15 @@
         </dependency>
         <!--MyBatis-->
         <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${mybatis.version}</version>
+        </dependency>
+        <!-- xxl-job-core -->
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+            <version>${xxjob.version}</version>
         </dependency>
         <!-- simbot Core -->
         <dependency>
