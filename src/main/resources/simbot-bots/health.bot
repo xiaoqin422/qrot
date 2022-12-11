@@ -1,9 +1,9 @@
 {
   "component": "simbot.mirai",
-  "code": 858465981,
+  "code": 2061994134,
   "passwordInfo": {
     "type": "md5_text",
-    "md5": "d028f0a9679a205cea885a02ae219076"
+    "md5": "ed48d107fcb3144cee5d3f37db96e4a5"
   },
   "config": {
     "workingDir": ".",
