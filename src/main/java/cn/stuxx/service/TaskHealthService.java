@@ -59,7 +59,7 @@ public interface TaskHealthService {
      * 根据taskID更新(非主键ID)
      * @param req TaskHealthUpdateContent
      */
-    @Validated({ValidationGroup.TASK_HEALTH_UPDATE.class,ValidationGroup.TASK_HEALTH_ID.class})
+    @Validated({ValidationGroup.TASK_HEALTH_UPDATE.class,ValidationGroup.TASK_HEALTH_ID.class,ValidationGroup.UID_OPTIONS.class})
     void updateHealthTask(@Valid @NotNull(message = "打卡任务参数缺失") TaskHealthReq req);
 
     /**

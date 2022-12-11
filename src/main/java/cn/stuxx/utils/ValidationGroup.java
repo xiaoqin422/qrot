@@ -11,4 +11,8 @@ public interface ValidationGroup {
     interface TASK_HEALTH_DO extends Default {}
     interface USER_INSERT extends Default{}
     interface USER_UPDATE extends Default{}
+    interface TASK_NOTIFY_INSERT extends Default{}
+    interface TASK_NOTIFY_UPDATE extends Default{}
+    interface TASK_NOTIFY_ID extends Default{}
+    interface TASK_NOTIFY_DO extends Default{}
 }

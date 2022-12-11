@@ -117,8 +117,8 @@ scanPeriod：监测配置文件是否有修改的时间间隔，默认值为6000
     <!-- 级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
     <logger name="cn.stuxx" level="INFO">
         <appender-ref ref="info_log" />
-        <appender-ref ref="error_log" />
     </logger>
+
     <logger name="love.forte.simbot.mirai" level="INFO">
         <appender-ref ref="info_log" />
     </logger>
@@ -131,11 +131,11 @@ scanPeriod：监测配置文件是否有修改的时间间隔，默认值为6000
         <appender-ref ref="error_log" />
     </logger>
 
-    <!-- additivity=false代表禁止默认累计的行为，即com.atomikos中的日志只会记录到日志文件中，不会输出层次级别更高的任何appender-->
+    <!-- additivity=false代表禁止默认累计的行为，即cn.stuxx.service中的日志只会记录到日志文件中，不会输出层次级别更高的任何appender-->
     <logger name="cn.stuxx.service" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT" />
         <appender-ref ref="info_log" />
         <appender-ref ref="error_log" />
-        <appender-ref ref="STDOUT" />
     </logger>
 
 </configuration>

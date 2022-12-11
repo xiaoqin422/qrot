@@ -1,5 +1,6 @@
 package cn.stuxx.model.vo;
 
+import cn.hutool.core.date.LocalDateTimeUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,17 +9,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TaskHealthResp {
-    private String msg;
-    private boolean isOk;
-    private int status;
     private String code;
+    private Integer status;
+
+    private String msg;
     private String address;
     private String pid;
     private String tw;
 
-    public String response(){
+    public String response() {
         return " \t打卡结果" +
-                "\n完成状态：" + status +
+                "\n执行时间：" + LocalDateTimeUtil.now() +
                 "\n打卡信息：" + msg +
                 "\n打卡地址：" + address +
                 "\n身份证号：" + pid +

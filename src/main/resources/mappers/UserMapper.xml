@@ -11,7 +11,7 @@
         <result property="qCode" column="q_code" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
-        <result property="roles" column="roles" jdbcType="VARCHAR"/>
+        <result property="roles" column="roles" jdbcType="VARCHAR" typeHandler="cn.stuxx.config.mybatis.StringListTypeHandler"/>
         <result property="isDisable" column="is_disable" jdbcType="INTEGER"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>

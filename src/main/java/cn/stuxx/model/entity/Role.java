@@ -1,7 +1,5 @@
 package cn.stuxx.model.entity;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -16,8 +16,6 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -45,10 +43,12 @@ public class UserServiceImpl implements UserService {
                 userDao.update(item);
                 return item;
             }
+            log.error("用户插入失败。user:{},err:{}",user,ErrorMessage.USERNAME_IS_EXIST.getMessage());
             throw new QRotException(ErrorMessage.USERNAME_IS_EXIST.getMessage(), ErrorMessage.USERNAME_IS_EXIST.getCode());
         }
         //QQ号不为空的话需要单独校验
         if (Strings.isNotBlank(qCode) && !ReUtil.isMatch(Constant.Regex.ACCOUNT_CODE, qCode)) {
+            log.error("用户插入失败。user:{},err:{}",user,ErrorMessage.ACCOUNT_CODE_ERROR.getMessage());
             throw new QRotException(ErrorMessage.ACCOUNT_CODE_ERROR.getMessage(), ErrorMessage.ACCOUNT_CODE_ERROR.getCode());
         }
         searchParam = new User();
@@ -64,6 +64,7 @@ public class UserServiceImpl implements UserService {
                 userDao.update(item);
                 return item;
             }
+            log.error("用户插入失败。user:{},err:{}",user,ErrorMessage.ACCOUNT_CODE_IS_EXIST.getMessage());
             throw new QRotException(ErrorMessage.ACCOUNT_CODE_IS_EXIST.getMessage(), ErrorMessage.ACCOUNT_CODE_IS_EXIST.getCode());
         }
         try {
@@ -106,6 +107,7 @@ public class UserServiceImpl implements UserService {
         search.setIsDisable(0);
         List<User> resList = userDao.queryAll(search);
         if (resList.size() == 0) {
+            log.error("通过QQ禁用用户失败。accountCode：{}",accountCode);
             throw new QRotException(ErrorMessage.ACCOUNT_CODE_NOT_EXIST.getMessage(), ErrorMessage.ACCOUNT_CODE_NOT_EXIST.getCode());
         }
         User user = resList.get(0);
@@ -127,6 +129,7 @@ public class UserServiceImpl implements UserService {
         search.setIsDisable(0);
         List<User> resList = userDao.queryAll(search);
         if (resList.size() == 0) {
+            log.error("通过QQ删除用户失败。accountCode:{}",accountCode);
             throw new QRotException(ErrorMessage.ACCOUNT_CODE_NOT_EXIST.getMessage(), ErrorMessage.ACCOUNT_CODE_NOT_EXIST.getCode());
         }
         User user = resList.get(0);

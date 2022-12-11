@@ -1,9 +1,6 @@
 package cn.stuxx.model.entity;
 
-import java.util.Date;
-
 import cn.hutool.core.util.IdUtil;
-import cn.stuxx.utils.Constant;
 import cn.stuxx.utils.ValidationGroup;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,8 +10,10 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 用户表(User)实体类
@@ -72,7 +71,7 @@ public class User implements Serializable {
     /**
      * 角色集合
      */
-    private String roles;
+    private List<String> roles;
     /**
      * 是否被禁用 1禁用
      */
@@ -96,7 +95,7 @@ public class User implements Serializable {
         user.setQCode(accountCode);
         user.setPassword(accountCode);
         user.setEmail(accountCode + "@qq.com");
-        user.setRoles("[1]");
+        user.setRoles(new LinkedList<>());
         return user;
     }
 }

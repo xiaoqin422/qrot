@@ -1,7 +1,6 @@
 package cn.stuxx.model.base.qrot;
 
 import cn.stuxx.utils.Constant;
-import cn.stuxx.utils.ValidationGroup;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

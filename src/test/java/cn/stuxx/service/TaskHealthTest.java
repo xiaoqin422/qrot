@@ -4,14 +4,18 @@ import cn.stuxx.model.base.qrot.QRotBaseRequest;
 import cn.stuxx.model.vo.TaskHealthReq;
 import cn.stuxx.utils.MyValidationUtil;
 import cn.stuxx.utils.ValidationGroup;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
+@Slf4j
 public class TaskHealthTest {
     @Autowired
     TaskHealthService healthService;
+    @Autowired
+    TaskNotifyService taskNotifyService;
     @Test
     public void taskHealthTest_doTaskHealth(){
         // Validator.isM
@@ -34,6 +38,13 @@ public class TaskHealthTest {
         req.setPid("142723200104220811");
         req.setTemperature(38.0);
         healthService.createHealthTaskByQQ(req);
+    }
+    @Test
+    public void logTest(){
+        log.debug("debug");
+        log.info("info");
+        log.warn("warn");
+        log.error("error");
     }
 
 }

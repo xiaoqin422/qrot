@@ -80,16 +80,19 @@ CREATE TABLE `task_listen`
 ) ENGINE = innoDB
   DEFAULT CHARSET = utf8 COMMENT = '监听任务表';
 
-CREATE TABLE `task_health_listen`
+CREATE TABLE `task_notify`
 (
-    `id`           bigint      NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-    `listen_id`    bigint      NOT NULL COMMENT '监听任务ID',
-    `sno`          varchar(15) NOT NULL COMMENT '学号',
-    `account_code` varchar(10) NOT NULL COMMENT 'QQ号码',
-    `name`         varchar(20) NOT NULL COMMENT '学生姓名',
+    `id`           bigint       NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `task_id`      varchar(30)  NOT NULL COMMENT '任务ID',
+    `u_id`         bigint       NOT NULL COMMENT '用户ID（任务负责人）',
+    `receive_code` varchar(20)  NOT NULL COMMENT '接收账号',
+    `msg`          varchar(120) NOT NULL COMMENT '通知消息',
+    `at_list`       json    DEFAULT NULL COMMENT 'at列表',
+    `type`         tinyint DEFAULT 0 COMMENT '通知类型 0 QQ 1 群聊',
+    `is_timing`    tinyint DEFAULT 0 COMMENT '是否定时 1定时',
     PRIMARY KEY (`id`)
 ) ENGINE = innoDB
-  DEFAULT CHARSET = utf8 COMMENT = '健康打卡提醒表';
+  DEFAULT CHARSET = utf8 COMMENT = '消息提醒表';
 
 CREATE TABLE `group`
 (
