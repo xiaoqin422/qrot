@@ -23,10 +23,12 @@ public interface Constant {
     }
     interface TableField{
         String TASK_HEALTH_PREFIX = "th-";
+        String TASK_NOTIFY_PREFIX = "tn-";
     }
     interface CommentMsg{
-        String HEADER = "---执行执行结束---";
+        String HEADER = "---指令执行结束---";
         String NOTIFY_USER_ADD_BOT = "---QQ消息提醒异常,请添加BOT%s---";
         String EMAIL_SUBJECT = "---QRot机器人提醒---";
+        String TASK_LISTEN = "---QRot体温打卡小贴士---";
     }
 }

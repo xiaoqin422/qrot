@@ -101,7 +101,7 @@ pipeline {
                     if (deploy == "是") {
                         sh "printenv"
                         sh "docker rm -f ${CONTAINER_NAME} || true"
-                        sh "docker run -d -p 8082:8080 -v /data/docker/qrot/cache:/qrot/cache -v /data/docker/qrot/logs:/qrot/logs --restart always --name ${CONTAINER_NAME} ${IMAGE_NAME}"
+                        sh "docker run -d -p 8081:8080 -p 9999:9999 -v /data/docker/qrot/cache:/qrot/cache -v /data/docker/qrot/logs:/qrot/logs -e Spring.profiles.active=prod --restart always --name ${CONTAINER_NAME} ${IMAGE_NAME}"
                     }
                 }
             }
