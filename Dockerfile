@@ -12,5 +12,6 @@ ENV JAVA_OPTS=""
 ENV PARAMS=""
 
 EXPOSE 8080
+EXPOSE 9999
 
 ENTRYPOINT [ "sh", "-c", "java -Djava.security.egd=file:/dev/./urandom $JAVA_OPTS -jar app.jar $PARAMS" ]
