@@ -33,7 +33,7 @@
         <xxjob.version>2.3.1</xxjob.version>
     </properties>
     <dependencies>
-        <!--Web-->
+        <!--Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
