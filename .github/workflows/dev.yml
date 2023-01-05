@@ -1,0 +1,35 @@
+name: QRot_Dev Actions
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  Checkout: # 拉取代码、环境准备
+    runs-on: ubuntu-latest
+    steps:
+      - name: init env
+        uses: actions/checkout@develop
+        env:
+          MY_VAR: Hi there! My name is
+          FIRST_NAME: Mona
+          MIDDLE_NAME: The
+          LAST_NAME: Octocat
+        run: |
+          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
+          ls
+  Test:     # 测试
+    needs: Checkout
+    steps:
+      - run: echo 'test...'
+  Build:    # 构建
+    needs: [Checkout,Test]
+    steps:
+      - run: echo 'build...'
+  Release:  # 发布
+    needs: [Checkout,Test,Build]
+    steps:
+      - run: echo 'release...'
+  Deploy:   # 部署
+    needs: [Checkout,Test,Build,Release]
+    steps:
+      - run: echo 'deploy'
