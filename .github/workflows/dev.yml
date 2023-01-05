@@ -19,18 +19,22 @@ jobs:
           echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
           ls
   Test:     # 测试
-    needs: Checkout
+    needs: [Checkout]
+    runs-on: ubuntu-latest
     steps:
       - run: echo 'test...'
   Build:    # 构建
     needs: [Checkout,Test]
+    runs-on: ubuntu-latest
     steps:
       - run: echo 'build...'
   Release:  # 发布
     needs: [Checkout,Test,Build]
+    runs-on: ubuntu-latest
     steps:
       - run: echo 'release...'
   Deploy:   # 部署
     needs: [Checkout,Test,Build,Release]
+    runs-on: ubuntu-latest
     steps:
       - run: echo 'deploy'
