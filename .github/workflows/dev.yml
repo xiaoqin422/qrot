@@ -7,8 +7,9 @@ jobs:
   Checkout: # 拉取代码、环境准备
     runs-on: ubuntu-latest
     steps:
-      - name: init env
+      - name: checkout code
         uses: actions/checkout@develop
+      - name: check env
         env:
           MY_VAR: Hi there! My name is
           FIRST_NAME: Mona
