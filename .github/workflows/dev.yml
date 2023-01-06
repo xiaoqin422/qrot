@@ -6,6 +6,8 @@ on:
 jobs:
   DeployOnALiYun: # 拉取代码、环境准备
     runs-on: ubuntu-latest
+    env:
+      image_name: ccr.ccs.tencentyun.com/xiaoqin422/qrot:latest
     steps:
       - name: Checkout # 代码检出
         uses: actions/checkout@v3
@@ -37,12 +39,10 @@ jobs:
         run: |
           ls && docker build -t ${{ github.repository }}:latest .
       - name: push
-        env:
-          image_name: ccr.ccs.tencentyun.com/xiaoqin422/qrot:latest
         run: |
-          docker images && docker tag ${{ github.repository }}:latest ${{image_name}} \
+          docker images && docker tag ${{ github.repository }}:latest $image_name \
           && docker images && \
-          docker pull ${{image_name}}
+          docker pull $image_name
 
       - name: ssh docker login    # 登陆云服务器
         uses: appleboy/ssh-action@master
