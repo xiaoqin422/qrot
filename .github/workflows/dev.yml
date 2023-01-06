@@ -37,12 +37,13 @@ jobs:
 
       - name: Build
         run: |
-          ls && docker build -t ${{ github.repository }}:latest .
+          ls && docker build -t ${{ github.repository }}:latest . \
+          echo ccr.ccs.tencentyun.com
       - name: push
         run: |
-          docker images && docker tag ${{ github.repository }}:latest $image_name \
-          && docker images &&  echo $image_name\
-          docker pull $image_name
+          docker images && docker tag ${{ github.repository }}:latest ${{ secrets.TENCENT_REPOSITORY_URL }}/${{ github.repository }}:latest \
+          && docker images &&  echo "${{ secrets.TENCENT_REPOSITORY_URL }}/${{ github.repository }}:latest" \
+          docker pull ${{ secrets.TENCENT_REPOSITORY_URL }}/${{ github.repository }}:latest
 
       - name: ssh docker login    # 登陆云服务器
         uses: appleboy/ssh-action@master
@@ -50,5 +51,5 @@ jobs:
           host: ${{ secrets.ALIYUN_CLOUD_IP }} #云服务器的ip
           username: ${{ secrets.ALIYUN_CLOUD_NAME }} #云服务器的用户名
           password: ${{ secrets.ALIYUN_CLOUD_PASSWORD }} #云服务器的密码
-          script: cd /data/deploy/qrot && sh deploy.sh ${{ secrets.TENCENT_REPOSITORY_URL }} ${{ secrets.TENCENT_DOCKER_USERNAME }} ${{ secrets.TENCENT_DOCKER_PASSWORD }} ${{ github.repository }} $image_name #运行脚本
+          script: cd /data/deploy/qrot && sh deploy.sh ${{ secrets.TENCENT_REPOSITORY_URL }} ${{ secrets.TENCENT_DOCKER_USERNAME }} ${{ secrets.TENCENT_DOCKER_PASSWORD }} QRot ${{ secrets.TENCENT_REPOSITORY_URL }}/${{ github.repository }}:latest #运行脚本
 
