@@ -37,10 +37,12 @@ jobs:
         run: |
           ls && docker build -t ${{ github.repository }}:latest .
       - name: push
+        env: |
+          image_name: ccr.ccs.tencentyun.com/xiaoqin422/qrot:latest
         run: |
-          docker images && docker tag ${{ github.repository }}:latest ccr.ccs.tencentyun.com/xiaoqin422/qrot:latest \
+          docker images && docker tag ${{ github.repository }}:latest ${{image_name}} \
           && docker images && \
-          docker pull ccr.ccs.tencentyun.com/xiaoqin422/qrot:latest
+          docker pull ${{image_name}}
 
       - name: ssh docker login    # 登陆云服务器
         uses: appleboy/ssh-action@master
