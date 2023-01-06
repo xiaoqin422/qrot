@@ -7,34 +7,45 @@ jobs:
   Checkout: # 拉取代码、环境准备
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code
-        uses: actions/checkout@develop
-      - name: check env
-        env:
-          MY_VAR: Hi there! My name is
-          FIRST_NAME: Mona
-          MIDDLE_NAME: The
-          LAST_NAME: Octocat
-        run: |
-          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
-          ls
-  Test:     # 测试
-    needs: [Checkout]
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 'test...'
-  Build:    # 构建
-    needs: [Checkout,Test]
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 'build...'
-  Release:  # 发布
-    needs: [Checkout,Test,Build]
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 'release...'
-  Deploy:   # 部署
-    needs: [Checkout,Test,Build,Release]
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 'deploy'
+      - name: Checkout # 代码检出
+        uses: actions/checkout@v3
+
+      - name: Setup JDK 8
+        uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn -B clean package --file pom.xml
+
+      - name: Login to Tencent Repository # 登录docker hub
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ secrets.TENCENT_REPOSITORY_URL }} # 设置登录到腾讯云镜像中心
+          username: ${{ secrets.Tencent_Docker_USERNAME }}
+          password: ${{ secrets.Tencent_Docker_PASSWORD }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx # 创建容器化环境
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and push # 构建和推送
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ccr.ccs.tencentyun.com/qinxiaoxiao/${{ github.repository }}:latest
+
+      - name: ssh docker login    # 登陆云服务器
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.ALIYUN_CLOUD_IP }} #云服务器的ip
+          username: ${{ secrets.ALIYUN_CLOUD_NAME }} #云服务器的用户名
+          password: ${{ secrets.ALIYUN_CLOUD_PASSWORD }} #云服务器的密码
+          script: cd /data/deploy/qrot && sh deploy.sh ${{ secrets.TENCENT_REPOSITORY_URL }} ${{ secrets.TENCENT_DOCKER_USERNAME }} ${{ secrets.TENCENT_DOCKER_PASSWORD }} ${{ github.repository }} ccr.ccs.tencentyun.com/qinxiaoxiao/${{ github.repository }}:latest #运行脚本
+
