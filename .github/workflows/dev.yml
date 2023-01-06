@@ -4,7 +4,7 @@ on:
     branches:
       - develop
 jobs:
-  Checkout: # 拉取代码、环境准备
+  DeployOnALiYun: # 拉取代码、环境准备
     runs-on: ubuntu-latest
     steps:
       - name: Checkout # 代码检出
@@ -39,7 +39,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ccr.ccs.tencentyun.com/qinxiaoxiao/${{ github.repository }}:latest
+          tags: ${{ secrets.TENCENT_REPOSITORY_URL }}/${{ github.repository }}:latest
 
       - name: ssh docker login    # 登陆云服务器
         uses: appleboy/ssh-action@master
@@ -47,5 +47,5 @@ jobs:
           host: ${{ secrets.ALIYUN_CLOUD_IP }} #云服务器的ip
           username: ${{ secrets.ALIYUN_CLOUD_NAME }} #云服务器的用户名
           password: ${{ secrets.ALIYUN_CLOUD_PASSWORD }} #云服务器的密码
-          script: cd /data/deploy/qrot && sh deploy.sh ${{ secrets.TENCENT_REPOSITORY_URL }} ${{ secrets.TENCENT_DOCKER_USERNAME }} ${{ secrets.TENCENT_DOCKER_PASSWORD }} ${{ github.repository }} ccr.ccs.tencentyun.com/qinxiaoxiao/${{ github.repository }}:latest #运行脚本
+          script: cd /data/deploy/qrot && sh deploy.sh ${{ secrets.TENCENT_REPOSITORY_URL }} ${{ secrets.TENCENT_DOCKER_USERNAME }} ${{ secrets.TENCENT_DOCKER_PASSWORD }} ${{ github.repository }} ${{ secrets.TENCENT_REPOSITORY_URL }}/${{ github.repository }}:latest #运行脚本
 
