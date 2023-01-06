@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       docker_registry: ccr.ccs.tencentyun.com
-      image_name: ccr.ccs.tencentyun.com/${{ github.repository }}:latest
+      image_name: ccr.ccs.tencentyun.com/${{ github.repository }}:1.0
       container_name: QRot
     steps:
       - name: Checkout # 代码检出
