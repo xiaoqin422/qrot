@@ -37,7 +37,7 @@ jobs:
         run: |
           ls && docker build -t ${{ github.repository }}:latest .
       - name: push
-        env: |
+        env:
           image_name: ccr.ccs.tencentyun.com/xiaoqin422/qrot:latest
         run: |
           docker images && docker tag ${{ github.repository }}:latest ${{image_name}} \
