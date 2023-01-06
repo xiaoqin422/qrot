@@ -33,13 +33,12 @@ jobs:
       - name: Set up Docker Buildx # 创建容器化环境
         uses: docker/setup-buildx-action@v2
 
-      - name: Build and push # 构建和推送
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ secrets.TENCENT_REPOSITORY_URL }}/${{ github.repository }}:latest
+      - name: Build
+        run: |
+          ls && docker build -t ${{ secrets.TENCENT_REPOSITORY_URL }}/${{ github.repository }}:latest .
+      - name: push
+        run: |
+          docker images && docker pull ${{ secrets.TENCENT_REPOSITORY_URL }}/${{ github.repository }}:latest
 
       - name: ssh docker login    # 登陆云服务器
         uses: appleboy/ssh-action@master
