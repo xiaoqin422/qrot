@@ -35,7 +35,7 @@ jobs:
 
       - name: Build
         run: |
-          ls && docker build -t ${{ secrets.TENCENT_REPOSITORY_URL }}/${{ github.repository }}:latest .
+          ls && docker build -t "${{ secrets.TENCENT_REPOSITORY_URL }}/${{ github.repository }}:latest" .
       - name: push
         run: |
           docker images && docker pull ${{ secrets.TENCENT_REPOSITORY_URL }}/${{ github.repository }}:latest
