@@ -38,7 +38,7 @@ jobs:
       - name: Build
         run: |
           ls && docker build -t ${{ github.repository }}:latest . \
-          echo ccr.ccs.tencentyun.com
+          && echo ccr.ccs.tencentyun.com
       - name: push
         run: |
           docker images && docker tag ${{ github.repository }}:latest ${{ secrets.TENCENT_REPOSITORY_URL }}/${{ github.repository }}:latest \
