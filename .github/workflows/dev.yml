@@ -44,7 +44,7 @@ jobs:
 
       - name: push
         run: |
-          docker images && docker pull $image_name
+          docker images && docker push $image_name
 
       - name: ssh docker login    # 登陆云服务器
         uses: appleboy/ssh-action@master
