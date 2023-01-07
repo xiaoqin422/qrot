@@ -6,10 +6,6 @@ on:
 jobs:
   DeployOnALiYun: # 拉取代码、环境准备
     runs-on: ubuntu-latest
-    env:
-      docker_registry: ccr.ccs.tencentyun.com
-      image_name: ccr.ccs.tencentyun.com/${{ github.repository }}:latest
-      container_name: QRot
     steps:
       - name: Checkout # 代码检出
         uses: actions/checkout@v3
@@ -38,10 +34,10 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Build
-        run: ls && docker build -t $image_name .
+        run: ls && docker build -t ccr.ccs.tencentyun.com/${{ github.repository }}:latest .
 
       - name: push
-        run: docker images && docker push $image_name
+        run: docker images && docker push ccr.ccs.tencentyun.com/${{ github.repository }}:latest
 
       - name: ssh docker login    # 登陆云服务器
         uses: appleboy/ssh-action@master
@@ -49,5 +45,5 @@ jobs:
           host: ${{ secrets.ALIYUN_CLOUD_IP }} #云服务器的ip
           username: ${{ secrets.ALIYUN_CLOUD_NAME }} #云服务器的用户名
           password: ${{ secrets.ALIYUN_CLOUD_PASSWORD }} #云服务器的密码
-          script: cd /data/deploy/qrot &&  ./deploy.sh $docker_registry ${{ secrets.TENCENT_DOCKER_USERNAME }} ${{ secrets.TENCENT_DOCKER_PASSWORD }} $container_name $image_name #运行脚本
+          script: cd /data/deploy/qrot &&  ./deploy.sh ccr.ccs.tencentyun.com ${{ secrets.TENCENT_DOCKER_USERNAME }} ${{ secrets.TENCENT_DOCKER_PASSWORD }} QRot ccr.ccs.tencentyun.com/${{ github.repository }}:latest #运行脚本
 
