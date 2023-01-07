@@ -27,7 +27,7 @@ jobs:
       - name: Login to Tencent Repository # 登录docker hub
         uses: docker/login-action@v2
         with:
-          registry: $docker_registry # 设置登录到腾讯云镜像中心
+          registry: ${{ docker_registry }} # 设置登录到腾讯云镜像中心
           username: ${{ secrets.TENCENT_DOCKER_USERNAME }}
           password: ${{ secrets.TENCENT_DOCKER_PASSWORD }}
 
